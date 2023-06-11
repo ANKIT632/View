@@ -1,0 +1,24 @@
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        String str = Integer.toString(n);
+        int count=0;
+        while(n!=0){
+            
+            int bit=n&1;
+            if(bit==1){
+                count++;
+            }
+            n=n>>>1;
+        }
+      
+        return count;
+    }
+}
+
+
+// In Java, n >>= 1 is a right shift operation that preserves the sign bit, 
+// meaning it treats n as a signed integer and fills the leftmost bit with the sign bit (0 for positive numbers, 1 for negative numbers).
+
+// On the other hand, n >>>= 1 is an unsigned right shift operation that fills the leftmost bit with a 0, regardless of the sign of n.
+// It treats n as an unsigned integer and shifts the bits to the right, effectively dividing n by 2.
