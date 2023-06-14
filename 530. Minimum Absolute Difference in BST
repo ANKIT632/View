@@ -1,0 +1,28 @@
+
+class Solution {
+
+
+     public int getMinimumDifference(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        inorderTraversal(root, list);
+
+        int minDiff = Integer.MAX_VALUE;
+        
+        for (int i = 1; i < list.size(); i++) {
+            int diff = list.get(i) - list.get(i - 1);
+            minDiff = Math.min(minDiff, diff);
+        }
+
+        return minDiff;
+    }
+
+    private void inorderTraversal(TreeNode node, List<Integer> list) {
+        if (node == null) {
+            return;
+        }
+
+        inorderTraversal(node.left, list);
+        list.add(node.val);
+        inorderTraversal(node.right, list);
+    }
+}
