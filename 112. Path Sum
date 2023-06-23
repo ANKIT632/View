@@ -1,0 +1,27 @@
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root==null){
+            return false;
+        }
+       return find(root,targetSum);
+    }
+
+    public static boolean find(TreeNode r,int t){
+
+        if(r==null){
+   
+            return false;
+        }
+
+       
+        if (r.left == null && r.right == null) {
+            return r.val == t;
+        }
+
+        int remSum = t - r.val;
+
+        return find(r.left, remSum) || find(r.right, remSum);
+
+    }
+    
+}
