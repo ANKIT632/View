@@ -1,0 +1,28 @@
+
+class Solution {
+    public int numTrees(int n) {
+     if(n==1){
+         return 1;
+     }
+
+   return find(n);
+    }
+
+    private int find(int n){
+  if(n==0 || n==1){
+         return 1;
+     }
+
+     if(n==2){
+         return 2;
+     }
+     int sum=0;
+     // calulate  value for each root node 
+
+      for(int i=1;i<=n;i++){
+      // if root i then according to BST all smaller i-1 element are left side and all n-1 are right side .
+       sum = sum+ find(i-1)*find(n-i);
+      }
+    return sum;
+    }
+}
