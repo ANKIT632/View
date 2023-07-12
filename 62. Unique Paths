@@ -1,0 +1,50 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+        // Create a 2D array to store the number of paths for each cell
+        int[][] dp = new int[m][n];
+        
+        // Initialize the number of paths for the first row and column to 1
+        for (int i = 0; i < m; i++)
+            dp[i][0] = 1;
+        for (int j = 0; j < n; j++)
+            dp[0][j] = 1;
+        
+        // Calculate the number of paths for each cell by summing the paths from the above cell and left cell
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        
+        // Return the number of paths for the bottom-right corner
+        return dp[m - 1][n - 1];
+    }
+}
+
+
+--------------------------using recursion------------------------------------------------------------------
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        return countPaths(0, 0, m, n);
+    }
+    
+    private int countPaths(int row, int col, int m, int n) {
+        // Base case: when robot reaches the bottom-right corner, return 1
+        if (row == m - 1 && col == n - 1)
+            return 1;
+        
+        // Recursive cases: move down and move right
+        int downPaths = 0;
+        int rightPaths = 0;
+        
+        if (row < m - 1)
+            downPaths = countPaths(row + 1, col, m, n);
+        
+        if (col < n - 1)
+            rightPaths = countPaths(row, col + 1, m, n);
+        
+        // Return the sum of paths from both recursive cases
+        return downPaths + rightPaths;
+    }
+}
