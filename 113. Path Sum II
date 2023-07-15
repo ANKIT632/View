@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        dfs(root, targetSum, path, result);
+        return result;
+    }
+
+    private void dfs(TreeNode node, int targetSum, List<Integer> path, List<List<Integer>> result) {
+        if (node == null) {
+            return;
+        }
+
+        // Add the current node value to the path
+        path.add(node.val);
+
+        // Check if the current node is a leaf and its value matches the target sum
+        if (node.left == null && node.right == null && node.val == targetSum) {
+            result.add(new ArrayList<>(path)); // Add the path to the result
+        }
+
+        // Recursively explore the left and right subtrees
+        dfs(node.left, targetSum - node.val, path, result);
+        dfs(node.right, targetSum - node.val, path, result);
+
+        // Remove the current node value from the path before backtracking
+        path.remove(path.size() - 1);
+    }
+}
