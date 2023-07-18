@@ -27,7 +27,7 @@ class Solution {
                 }
                 
                 // add right element
-                if (currentNode.right != null) {
+                if (currentNode.right != null) { 
                     queue.offer(currentNode.right);
                 }
             }
