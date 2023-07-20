@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+       
+         ListNode smallList = new ListNode(0);
+        ListNode s = smallList;
+        ListNode greaterList = new ListNode(0);
+        ListNode L = greaterList;
+
+        while (head != null) {
+            if (head.val < x) {
+                s.next = head;
+                s = s.next;
+            } else {
+                L.next = head;
+                L = L.next;
+            }
+            head = head.next;
+        }
+
+
+        L.next = null; // Set last of larger zero
+        s.next = greaterList.next; // connect the those list.
+
+// remove zero element
+        return smallList.next;
+    }
+}
