@@ -1,0 +1,35 @@
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        int[] postIndex = {postorder.length - 1}; // Initialize postIndex to the last index of postorder array
+        return buildTreeHelper(inorder, postorder, 0, inorder.length - 1, postIndex);
+    }
+
+    private TreeNode buildTreeHelper(int[] inorder, int[] postorder, int inStart, int inEnd, int[] postIndex) {
+        
+        if (inStart > inEnd) {
+            return null;
+        }
+
+        // Create the root node using the last element of postorder array
+        TreeNode root = new TreeNode(postorder[postIndex[0]]);
+        postIndex[0]--;
+
+        // Find the index of the root node in the inorder array
+        int inIndex = findInorderIndex(inorder, inStart, inEnd, root.val);
+
+        // Recursively construct right subtree first, as postorder traverses from left to right
+        root.right = buildTreeHelper(inorder, postorder, inIndex + 1, inEnd, postIndex);
+        root.left = buildTreeHelper(inorder, postorder, inStart, inIndex - 1, postIndex);
+
+        return root;
+    }
+
+    private int findInorderIndex(int[] inorder, int start, int end, int target) {
+        for (int i = start; i <= end; i++) {
+            if (inorder[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
