@@ -7,7 +7,7 @@ class Solution {
             return result; 
         }
          
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>(); 
 
         // add element at the end.
         queue.offer(root);
