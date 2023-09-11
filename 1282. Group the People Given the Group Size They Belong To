@@ -1,0 +1,25 @@
+public class Solution {
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+        
+        HashMap<Integer, List<Integer>> temp = new HashMap<>();
+        List<List<Integer>> Ans = new ArrayList<>();
+        
+        for(int i = 0; i < groupSizes.length; i++) {
+            int val = groupSizes[i];
+          if (!temp.containsKey(val)) {
+             temp.put(val, new ArrayList<>());
+        }
+            temp.get(val).add(i);
+            
+            if(temp.get(val).size() == val) {
+                
+                // copy the Arraylist in the new ArrayList and add.
+                //use because if we clear the ArrayList then also clear Ans array list because refernece is same.
+                Ans.add(new ArrayList<>(temp.get(val)));
+
+                // clear the ArrayList
+                temp.get(val).clear();
+            }
+        }
+        return Ans;
+    }
