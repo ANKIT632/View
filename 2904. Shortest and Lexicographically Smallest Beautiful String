@@ -1,0 +1,30 @@
+import java.math.BigInteger;
+
+class Solution {
+    public String shortestBeautifulSubstring(String s, int k) {
+        String ans = "";
+        int count = k;
+
+        for (int i = 0; i <= s.length() - k; i++) {
+            for (int j = i; j < s.length(); j++) {
+                if (s.charAt(j) == '1') {
+                    count--;
+                }
+
+                if (count == 0) {
+                    if (ans.isEmpty() || (ans.length() >= j - i + 1)) {
+                        BigInteger decimal1 = ans.isEmpty() ? BigInteger.ZERO : new BigInteger(ans, 2);
+                        BigInteger decimal2 = new BigInteger(s.substring(i, j + 1), 2);
+
+                        if (ans.isEmpty() || decimal1.compareTo(decimal2) >= 0) {
+                            ans = s.substring(i, j + 1);
+                        }
+                    }
+                }
+            }
+            count = k;
+        }
+
+        return ans;
+    }
+}
