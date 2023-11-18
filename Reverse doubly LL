@@ -1,0 +1,18 @@
+  if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node curr = head;
+        Node prev = null;
+        Node next = null;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            curr.prev = next; // Point the prev pointer to the next node (in the original list)
+            prev = curr;
+            curr = next;
+        }
+        
+        // 'prev' now points to the new head of the reversed list
+        return prev;
